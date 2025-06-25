@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>🌟 Piedra, Papel o Tijera 🌟</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: radial-gradient(circle, #1a1a1a 0%, #000000 100%);
+      color: #00ffcc;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #00e6e6;
+      text-shadow: 0 0 10px #00ffff;
+    }
+
+    .botones {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      font-size: 2em;
+      padding: 20px;
+      background-color: #111;
+      color: #00ffcc;
+      border: 3px solid #00ffcc;
+      border-radius: 15px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #00ffcc;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    #resultado {
+      font-size: 1.8em;
+      text-align: center;
+      line-height: 1.6;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    .ganaste {
+      color: #00ff00;
+      font-weight: bold;
+    }
+
+    .perdiste {
+      color: #ff4444;
+      font-weight: bold;
+    }
+
+    .empate {
+      color: #ffaa00;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟 Piedra, Papel o Tijera EXTREMO 🌟</h1>
+
+  <div class="botones">
+    <button onclick="jugar('piedra')">🪨</button>
+    <button onclick="jugar('papel')">📄</button>
+    <button onclick="jugar('tijera')">✂️</button>
+  </div>
+
+  <div id="resultado"></div>
+
+  <script>
+    const opciones = ['piedra', 'papel', 'tijera'];
+
+    function jugar(eleccionJugador) {
+      const eleccionPC = opciones[Math.floor(Math.random() * opciones.length)];
+      let mensaje = '';
+      let clase = '';
+
+      if (eleccionJugador === eleccionPC) {
+        mensaje = 'Hemos quedado empate! Juguemos otra.';
+        clase = 'empate';
+      } else if (
+        (eleccionJugador === 'piedra' && eleccionPC === 'tijera') ||
+        (eleccionJugador === 'papel' && eleccionPC === 'piedra') ||
+        (eleccionJugador === 'tijera' && eleccionPC === 'papel')
+      ) {
+        mensaje = '¡Ganaste!';
+        clase = 'ganaste';
+      } else {
+        mensaje = '¡Perdiste!';
+        clase = 'perdiste';
+      }
+
+      document.getElementById('resultado').innerHTML = `
+        <div>Tu elegiste: <strong>${eleccionJugador}</strong></div>
+        <div>El PC eligio: <strong>${eleccionPC}</strong></div>
+        <div class="${clase}">${mensaje}</div>
+      `;
+    }
+  </script>
+</body>
+</html>
